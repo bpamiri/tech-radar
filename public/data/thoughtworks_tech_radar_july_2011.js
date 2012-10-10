@@ -1,4 +1,4 @@
-var radar_data = [
+var radarData = [
     {"name":"Progressive Enhancement", "pc":{"r":140, "t":120}, "movement":"t"},
     {"name":"Automate Database Deployment", "pc":{"r":140, "t":135}, "movement":"t"},
     {"name":"Platform roadmaps", "pc":{"r":40, "t":112}, "movement":"c"},
@@ -86,7 +86,7 @@ var radar_data = [
 ];
 
 //left to right -> top to bottom
-var radar_quadrants = [
+var radarQuadrants = [
     {"name":"Techniques", "start":0, "end":29},
     {"name":"Tools", "start":29, "end":55},
     {"name":"Platforms", "start":55, "end":73},
@@ -94,11 +94,11 @@ var radar_quadrants = [
 ];
 
 //
-var radar_arcs = [
+var radarArcs = [
     {'r':150, 'name':'Adopt'},
     {'r':275, 'name':'Trial'},
     {'r':350, 'name':'Assess'},
     {'r':400, 'name':'Hold'}
 ];
 
-var radar_title = "ThoughtWorks Technology Radar (July 2011)";
+var radarTitle = "ThoughtWorks Technology Radar (July 2011)";
