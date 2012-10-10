@@ -12,6 +12,8 @@ function init() {
         .attr("r", radius)
         .attr("cx", canvasSize / 2)
         .attr("cy", canvasSize / 2)
+        .attr("stroke", "black")
+        .attr("stroke-width", "1")
         .style("fill", "pink");
 
 }
