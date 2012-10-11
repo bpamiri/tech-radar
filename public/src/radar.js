@@ -14,6 +14,20 @@ function init() {
             .attr("cy", canvasSize / 2)
             .attr("class", "ring");
     });
+
+
+
+    radarData.forEach(function(item){
+        var x = item.pc.r * Math.cos(item.pc.t);
+        var y = item.pc.r * Math.sin(item.pc.t);
+
+        console.log(x);
+
+        container.append("circle")
+            .attr("r", 5)
+            .attr("cx", x)
+            .attr("cy", y)
+    });
 }
 
 
