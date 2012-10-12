@@ -16,8 +16,7 @@ function init() {
     });
 
 
-
-    radarData.forEach(function(item){
+    radarData.forEach(function (item) {
         var x = item.pc.r * Math.cos(item.pc.t);
         var y = item.pc.r * Math.sin(item.pc.t);
 
@@ -25,8 +24,8 @@ function init() {
 
         container.append("circle")
             .attr("r", 5)
-            .attr("cx", x)
-            .attr("cy", y)
+            .attr("cx", x + canvasSize / 2)
+            .attr("cy", y + canvasSize / 2)
     });
 }
 
