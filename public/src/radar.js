@@ -26,16 +26,25 @@ function techRadar() {
 
 
     this.drawBlips = function (container, canvasSize) {
+        var self = this;
+
         radarData.forEach(function (item) {
-            var x = item.pc.r * Math.cos(item.pc.t);
-            var y = item.pc.r * Math.sin(item.pc.t);
+            var coOrdinates = self.polarToCartesian(item.pc);
 
             container.append("circle")
                 .attr("r", 5)
-                .attr("cx", x + canvasSize / 2)
-                .attr("cy", y + canvasSize / 2)
+                .attr("cx", coOrdinates.x + canvasSize / 2)
+                .attr("cy", coOrdinates.y + canvasSize / 2)
         });
     };
+
+
+    this.polarToCartesian = function (polar) {
+        var x = polar.r * Math.cos(polar.t);
+        var y = polar.r * Math.sin(polar.t);
+
+        return {"x":x, "y":y}
+    }
 
 }
 
