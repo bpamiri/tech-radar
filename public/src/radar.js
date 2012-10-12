@@ -5,11 +5,12 @@ function techRadar() {
 
         var container = d3.select("body")
             .append("svg")
-            .attr("width", this.canvasSize)
-            .attr("height", this.canvasSize);
+            .attr("width", canvasSize)
+            .attr("height", canvasSize);
 
 
         this.drawRings(container, canvasSize);
+        this.drawQuadrants(container, canvasSize);
         this.drawBlips(container, canvasSize);
     };
 
@@ -24,6 +25,22 @@ function techRadar() {
         });
     };
 
+
+    this.drawQuadrants = function (container, canvasSize) {
+        container.append("line")
+            .attr("x1", canvasSize / 2)
+            .attr("y1", 0)
+            .attr("x2", canvasSize / 2)
+            .attr("y2", canvasSize)
+            .attr("class", "quadrant");
+
+        container.append("line")
+            .attr("x1", 0)
+            .attr("y1", canvasSize / 2)
+            .attr("x2", canvasSize)
+            .attr("y2", canvasSize / 2)
+            .attr("class", "quadrant");
+    };
 
     this.drawBlips = function (container, canvasSize) {
         var self = this;
