@@ -1,6 +1,8 @@
 function techRadar() {
 
     this.init = function () {
+        var self = this;
+
         var canvasSize = 820;
 
         var container = d3.select("body")
@@ -8,10 +10,31 @@ function techRadar() {
             .attr("width", canvasSize)
             .attr("height", canvasSize);
 
-
         this.drawRings(container, canvasSize);
         this.drawQuadrants(container, canvasSize);
-        this.drawBlips(container, canvasSize);
+
+        container.selectAll("svg")
+            .data(radarData).enter()
+            .append("path")
+            .attr("transform", function (d) {
+                var coOrdinates = self.polarToCartesian(d.pc, canvasSize);
+                return "translate(" + coOrdinates.x + "," + coOrdinates.y + ")";
+            })
+            .attr("d", d3.svg.symbol()
+            .type(function (d, i) {
+                return self.getBlipType(d);
+            }));
+    };
+
+
+    this.getBlipType = function (d) {
+        if (d.movement == "c") {
+            return "circle";
+        } else if (d.movement == "t") {
+            return "triangle-up";
+        } else {
+            console.log("Unknown movement for blip: " + d.movement);
+        }
     };
 
 
@@ -42,23 +65,10 @@ function techRadar() {
             .attr("class", "quadrant");
     };
 
-    this.drawBlips = function (container, canvasSize) {
-        var self = this;
 
-        radarData.forEach(function (item) {
-            var coOrdinates = self.polarToCartesian(item.pc);
-
-            container.append("circle")
-                .attr("r", 5)
-                .attr("cx", coOrdinates.x + canvasSize / 2)
-                .attr("cy", coOrdinates.y + canvasSize / 2)
-        });
-    };
-
-
-    this.polarToCartesian = function (polar) {
-        var x = polar.r * Math.cos(polar.t);
-        var y = polar.r * Math.sin(polar.t);
+    this.polarToCartesian = function (polar, canvasSize) {
+        var x = (polar.r * Math.cos(polar.t)) + canvasSize / 2;
+        var y = (polar.r * Math.sin(polar.t)) + canvasSize / 2;
 
         return {"x":x, "y":y}
     }
