@@ -8,3 +8,13 @@
     stroke: black;
     stroke-width: 1px
 }
+
+.c {
+    fill: rgb(55, 153, 221);
+    stroke: black;
+}
+
+.t {
+    fill: rgb(55, 153, 221);
+    stroke: black;
+}

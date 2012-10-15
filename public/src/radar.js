@@ -22,12 +22,15 @@ function techRadar() {
             })
             .attr("d", d3.svg.symbol()
             .type(function (d, i) {
-                return self.getBlipType(d);
-            }));
+                return self.getSymbolForBlip(d);
+            }))
+            .attr("class", function (d) {
+                return d.movement
+            });
     };
 
 
-    this.getBlipType = function (d) {
+    this.getSymbolForBlip = function (d) {
         if (d.movement == "c") {
             return "circle";
         } else if (d.movement == "t") {
