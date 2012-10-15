@@ -5,7 +5,7 @@ function techRadar() {
 
         var canvasSize = 820;
 
-        var container = d3.select("body")
+        var container = d3.select("#radar")
             .append("svg")
             .attr("width", canvasSize)
             .attr("height", canvasSize);
@@ -30,8 +30,19 @@ function techRadar() {
                 return d.movement
             })
             .attr('filter', 'url(#dropShadow)');
+
+
+        this.foo();
     };
 
+    this.foo = function () {
+        var list = d3.select("#legend")
+            .append("ul");
+
+        radarData.forEach(function (d) {
+            list.append("li").text(d.name);
+        })
+    };
 
     this.shadowDefs = function (container) {
         var dropShadowFilter = container.append('svg:filter')
