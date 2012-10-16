@@ -11,10 +11,14 @@
 
 .c {
     fill: rgb(55, 153, 221);
-    stroke: black;
+    stroke: white;
 }
 
 .t {
     fill: rgb(55, 153, 221);
-    stroke: black;
+    stroke: white;
+}
+
+.description {
+    position: absolute;
 }

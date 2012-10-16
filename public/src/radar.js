@@ -8,7 +8,8 @@ function techRadar() {
         var container = d3.select("#radar")
             .append("svg")
             .attr("width", canvasSize)
-            .attr("height", canvasSize);
+            .attr("height", canvasSize)
+            .on("mousemove", self.mouseMove);
 
         this.shadowDefs(container.append('svg:defs'));
 
@@ -23,19 +24,46 @@ function techRadar() {
                 return "translate(" + coOrdinates.x + "," + coOrdinates.y + ")";
             })
             .attr("d", d3.svg.symbol()
-            .type(function (d, i) {
+            .type(function (d) {
                 return self.getSymbolForBlip(d);
             }))
             .attr("class", function (d) {
                 return d.movement
             })
-            .attr('filter', 'url(#dropShadow)');
+            .attr("filter", "url(#dropShadow)")
+            .on("mouseout", self.hideDescription)
+            .on("mouseover", self.showDescription);
 
 
-        this.foo();
+        this.addLegend();
     };
 
-    this.foo = function () {
+
+    this.hideDescription = function () {
+        var circle = d3.select(this);
+
+        d3.select(".description").style("display", "none");
+    };
+
+
+    this.showDescription = function () {
+        var blip = d3.select(this);
+
+        d3.select(".description").style("display", "block");
+        d3.select("p").text("Foo");
+    };
+
+
+    this.mouseMove = function () {
+        var coOrdinates = d3.svg.mouse(this);
+
+        var description = d3.select(".description");
+        description.style("top", coOrdinates[1] + "px");
+        description.style("left", coOrdinates[0] + 15 + "px");
+    };
+
+
+    this.addLegend = function () {
         var list = d3.select("#legend")
             .append("ul");
 
@@ -43,6 +71,7 @@ function techRadar() {
             list.append("li").text(d.name);
         })
     };
+
 
     this.shadowDefs = function (container) {
         var dropShadowFilter = container.append('svg:filter')
