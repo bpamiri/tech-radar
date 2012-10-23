@@ -30,6 +30,9 @@ function techRadar() {
             .attr("class", function (d) {
                 return d.movement
             })
+            .attr("description", function(d){
+                return d.tip;
+            })
             .attr("filter", "url(#dropShadow)")
             .on("mouseout", self.hideDescription)
             .on("mouseover", self.showDescription);
@@ -50,7 +53,7 @@ function techRadar() {
         var blip = d3.select(this);
 
         d3.select(".description").style("display", "block");
-        d3.select("p").text("Foo");
+        d3.select("p").text(blip.attr("description"));
     };
 
 
